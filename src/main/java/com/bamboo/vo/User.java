@@ -5,6 +5,7 @@ package com.bamboo.vo;
  * @date 18/1/26 上午1:47.
  */
 public class User {
+
     private Integer id;
 
     private String password;
