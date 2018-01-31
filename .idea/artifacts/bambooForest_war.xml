@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="bambooForest:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="bambooForest.war">
+      <element id="artifact" artifact-name="bambooForest:war exploded" />
+    </root>
+  </artifact>
+</component>

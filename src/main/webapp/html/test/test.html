@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+</head>
+<body>
+
+
+
+<script src="../../js/jquery-3.2.1.js"></script>
+<script src="../../jsUtil/PublicBefore.js"></script>
+<script>
+    $(function () {
+        doAjaxJson(PROJECT_NAME + "/YascmfDatasController/findYascmfDatasByPage.do", {
+            instrumentId: 'D01',
+            startTimeTIMESTAMP: '2016-09-01 00:00:00',
+            endTimeTIMESTAMP: '2017-12-31 00:00:00'
+        }, function (data) {
+            console.log(data);
+        });
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<html>
+<head>
+    <title>Canvas tutorial</title>
+    <style type="text/css">
+        canvas {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body onload="draw();">
+<canvas id="tutorial" width="800" height="800"></canvas>
+<script src="../../js/jquery-3.2.1.js"></script>
+<script src="initTest.js"></script>
+<script type="text/javascript">
+    function draw() {
+        var canvas = document.getElementById('tutorial');
+        if (canvas.getContext) {
+            var ctx = canvas.getContext('2d');
+//            ctx.fillRect(25, 25, 100, 100);
+            for (var i = 0; i < _Data.length; i++) {
+                var data = _Data[i];
+//                ctx.fillStyle = "green";
+                ctx.fillRect(data.x, data.y, 1, 1);
+            }
+            for (var i = 0; i < Zhan.length; i++) {
+                ctx.fillStyle = "red";
+                ctx.fillRect(Zhan[i].x, Zhan[i].y, 1, 1);
+            }
+        }
+    }
+
+    $(function() {
+        ymin = ymax = _Data[0].y
+
+        //求出_data数组中最大和最小值
+        for (i = 1; i <= 104; i++) {
+            if (_Data[i].y > ymax)
+                ymax = _Data[i].y;
+            if (_Data[i].y < ymin)
+                ymin = _Data[i].y;
+        }
+        console.log("ymin:" + ymin);
+        console.log("ymax:" + ymax);
+    });
+
+</script>
+</body>
+</html>

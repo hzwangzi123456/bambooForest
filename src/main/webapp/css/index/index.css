@@ -1,0 +1,142 @@
+.header {
+    padding: 20px 0 20px 0;
+}
+
+.header-content {
+    width: 1100px;
+    margin: 0px auto;
+}
+
+.header-title {
+    font-size: 22px;
+    font-weight: 800;
+    line-height: normal;
+    padding: 8px 0px 8px 0px;
+}
+
+.header-title-a {
+    color: rgb(72, 72, 72);
+}
+
+.header-title-a:hover {
+    color: #76C3E6;
+}
+
+.header-menu {
+    padding: 12px 0px 8px 0px;
+}
+
+.header-menu-ul li {
+    float: left;
+    margin-right: 45px;
+    font-size: 18px;
+}
+
+.header-menu-a:hover {
+    color: #76C3E6;
+}
+
+.content {
+    padding: 30px 0;
+    background: rgb(238, 241, 247);
+}
+
+.content-main {
+    width: 1100px;
+    margin: 0 auto;
+}
+
+.part-title {
+    line-height: 60px;
+}
+
+.part-name {
+    font-size: 22px;
+}
+
+.part-more {
+    font-size: 16px;
+    padding-right: 45px;
+}
+
+.part-more-a:hover {
+    color: #76C3E6;
+}
+
+.part-three-unit {
+    width: 31%;
+    height: 205px;
+    background-color: #ffffff;
+    margin-right: 12px;
+}
+
+.part-four-unit {
+    width: 23%;
+    height: 310px;
+    background-color: #ffffff;
+    margin-right: 12px;
+}
+
+.part-two {
+    margin-top: 10px;
+}
+
+.part-three {
+    margin-top: 10px;
+}
+
+.part-two-unit {
+    width: 47%;
+    height: 310px;
+    background-color: #ffffff;
+    margin-right: 12px;
+}
+
+.part-unit-content {
+    padding: 20px 10px 10px 10px;
+}
+
+.unit-name {
+    font-weight: 800;
+    font-size: 19px;
+}
+
+.unit-picture {
+    height: 141px;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.unit-picture-two {
+    height: 248px;
+    width: 100%;
+    margin-top: 10px;
+    background-color: #dedede;
+}
+
+.unit-introduce {
+    margin-top: 10px;
+    font-size: 16px;
+    line-height: 22px;
+    font-weight: 400;
+}
+
+.footer-content {
+    padding-top: 25px;
+    padding-bottom: 25px;
+    border-top: 1px solid #EBEBEB;
+}
+
+.footer-content-main {
+    width: 1100px;
+    margin: 0 auto;
+}
+
+.laboratory-name {
+    font-size: 16px;
+}
+
+.address {
+    font-size:16px;
+    margin-left:20px;
+}

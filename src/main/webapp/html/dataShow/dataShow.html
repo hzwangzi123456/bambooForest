@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>dataShow</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../../css/base03.css">
+    <link rel="stylesheet" href="../../css/controllerCommon/header.css">
+    <link rel="stylesheet" href="../../css/controllerCommon/left.css">
+    <link rel="stylesheet" href="../../css/dataShow/dataShow.css">
+    <link rel="stylesheet" href="../../css/bootstrap.css"/>
+    <link type="text/css" rel="stylesheet" href="../../css/colorfulTab.css">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet"
+          href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+</head>
+<body>
+<div class="header"></div>
+<div class="content">
+    <div class="nav"></div>
+    <div class="main">
+        <div class="main-title">
+            数据可视化
+        </div>
+        <div class="main-title-line"></div>
+        <div class="main-select">
+            <!--<div class="line-one">-->
+            <!--<div class="unit">-->
+            <!--<div class="unit-a">-->
+            <!--所属省份:-->
+            <!--</div>-->
+            <!--<select name="" id="select01" class="unit-b">-->
+            <!--<option value="" class="" selected="selected">请选择</option>-->
+            <!--</select>-->
+            <!--<div class="cb"></div>-->
+            <!--</div>-->
+            <!--<div class="unit">-->
+            <!--<div class="unit-a">-->
+            <!--所属地区:-->
+            <!--</div>-->
+            <!--<select name="" id="select02" class="unit-b">-->
+            <!--<option value="" class="" selected="selected">请选择</option>-->
+            <!--</select>-->
+            <!--<div class="cb"></div>-->
+            <!--</div>-->
+            <!--<div class="unit">-->
+            <!--<div class="unit-a">-->
+            <!--设备编号:-->
+            <!--</div>-->
+            <!--<select name="" id="select03" class="unit-b">-->
+            <!--<option value="" class="" selected="selected">请选择</option>-->
+
+            <!--</select>-->
+            <!--<div class="cb"></div>-->
+            <!--</div>-->
+            <!--<div class="cb"></div>-->
+            <!--</div>-->
+            <div class="line-one">
+                <div class="unit">
+                    <div class="unit-a">
+                        起始时间:
+                    </div>
+                    <input placeholder="选择起始日期"
+                           type="text"
+                           style="float:left;width:136px;height:30px;border-radius: 5px;margin-left: 5px;"
+                           class="form-control" id="start">
+                    <div class="cb"></div>
+                </div>
+                <div class="unit">
+                    <div class="unit-a">
+                        终止时间:
+                    </div>
+                    <input type="text"
+                           placeholder="选择结束日期"
+                           style="float:left;width:136px;height:30px;border-radius: 5px;margin-left: 5px;"
+                           class="form-control" id="end">
+                    <div class="cb"></div>
+                </div>
+                <div class="unit">
+                    <div class="unit-c" id="reload">
+                        点击加载
+                    </div>
+                </div>
+                <div class="cb"></div>
+            </div>
+        </div>
+        <div class="main-title-line"></div>
+        <div class="single-multiple">
+            <div class="single-button button-green">
+                单图
+            </div>
+            <div class="single-button">
+                多图
+            </div>
+            <div class="cb"></div>
+        </div>
+        <div class="singlebox">
+            <div class="chart" style="display: block;" id="chart">
+                <!-- 选项卡 -->
+                <div class="colorful-tab-wrapper" style="width:850px; height: 450px;margin-left:100px;"
+                     id="colorful-elliptic">
+                    <ul class="colorful-tab-menu">
+                        <li class="colorful-tab-menu-item active" tab-color="#9ACD32">
+                            <a href="#airHumidity">空气湿度</a>
+                        </li>
+                        <li class="colorful-tab-menu-item" tab-color="#BC8F8F">
+                            <a href="#airTemperature">空气温度</a>
+                        </li>
+                        <li class="colorful-tab-menu-item" tab-color="#C7C300">
+                            <a href="#insectDensity">虫口密度</a>
+                        </li>
+                        <li class="colorful-tab-menu-item" tab-color="#ABCDEF">
+                            <a href="#soilTemperature">土壤温度</a>
+                        </li>
+                        <li class="colorful-tab-menu-item" tab-color="#87CEFF">
+                            <a href="#carbonDioxide">二氧化碳含量</a>
+                        </li>
+                        <li class="colorful-tab-menu-item" tab-color="#ABABAB">
+                            <a href="#soilHumidity">土壤湿度</a>
+                        </li>
+                    </ul>
+                    <div class="colorful-tab-container" style="height: 500px;width: 600px;">
+                        <div class="colorful-tab-content active" style="position:absolute;height: 300px;width: 800px;"
+                             id="airHumidity"></div>
+                        <div class="colorful-tab-content" style="position:absolute;height: 300px;width: 800px;"
+                             id="airTemperature"></div>
+                        <div class="colorful-tab-content" style="position:absolute;height: 300px;width: 800px;"
+                             id="insectDensity"></div>
+                        <div class="colorful-tab-content" style="position:absolute;height: 300px;width: 800px;"
+                             id="soilTemperature"></div>
+                        <div class="colorful-tab-content" style="position:absolute;height: 300px;width: 800px;"
+                             id="carbonDioxide"></div>
+                        <div class="colorful-tab-content" style="position:absolute;height: 300px;width: 800px;"
+                             id="soilHumidity"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mutiplebox" style="display: none;">
+            <div class="chart" style="display: block;" id="airHumiditychart">
+                <div class="colorful-tab-wrapper" style="width:850px; height: 450px;margin-left:100px;"
+                     id="colorful-elliptic-airHumidity">
+                    <ul class="colorful-tab-menu">
+                        <li class="colorful-tab-menu-item active" tab-color="#9ACD32">
+                            <a href="#airHumiditychart-airHumidity">空气湿度</a>
+                        </li>
+                    </ul>
+                    <div class="colorful-tab-container" style="height: 500px;width: 600px;">
+                        <div class="colorful-tab-content active" style="position:absolute;height: 300px;width: 800px;"
+                             id="airHumiditychart-airHumidity"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="chart" style="display: block;" id="airTemperaturechart">
+                <div class="colorful-tab-wrapper" style="width:850px; height: 450px;margin-left:100px;"
+                     id="colorful-elliptic-airTemperature">
+                    <ul class="colorful-tab-menu">
+                        <li class="colorful-tab-menu-item active" tab-color="#9ACD32">
+                            <a href="#airTemperaturechart-airTemperature">空气温度</a>
+                        </li>
+                    </ul>
+                    <div class="colorful-tab-container" style="height: 500px;width: 600px;">
+                        <div class="colorful-tab-content active" style="position:absolute;height: 300px;width: 800px;"
+                             id="airTemperaturechart-airTemperature"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="chart" style="display: block;" id="insectDensitychart">
+                <div class="colorful-tab-wrapper" style="width:850px; height: 450px;margin-left:100px;"
+                     id="colorful-elliptic-insectDensity">
+                    <ul class="colorful-tab-menu">
+                        <li class="colorful-tab-menu-item active" tab-color="#9ACD32">
+                            <a href="#insectDensitychart-insectDensity">虫口密度</a>
+                        </li>
+                    </ul>
+                    <div class="colorful-tab-container" style="height: 500px;width: 600px;">
+                        <div class="colorful-tab-content active" style="position:absolute;height: 300px;width: 800px;"
+                             id="insectDensitychart-insectDensity"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="chart" style="display: block;" id="soilTemperaturechart">
+                <div class="colorful-tab-wrapper" style="width:850px; height: 450px;margin-left:100px;"
+                     id="colorful-elliptic-soilTemperature">
+                    <ul class="colorful-tab-menu">
+                        <li class="colorful-tab-menu-item active" tab-color="#9ACD32">
+                            <a href="#soilTemperaturechart-soilTemperature">土壤温度</a>
+                        </li>
+                    </ul>
+                    <div class="colorful-tab-container" style="height: 500px;width: 600px;">
+                        <div class="colorful-tab-content active" style="position:absolute;height: 300px;width: 800px;"
+                             id="soilTemperaturechart-soilTemperature"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="chart" style="display: block;" id="carbonDioxidechart">
+                <div class="colorful-tab-wrapper" style="width:850px; height: 450px;margin-left:100px;"
+                     id="colorful-elliptic-carbonDioxide">
+                    <ul class="colorful-tab-menu">
+                        <li class="colorful-tab-menu-item active" tab-color="#9ACD32">
+                            <a href="#carbonDioxidechart-carbonDioxide">二氧化碳含量</a>
+                        </li>
+                    </ul>
+                    <div class="colorful-tab-container" style="height: 500px;width: 600px;">
+                        <div class="colorful-tab-content active" style="position:absolute;height: 300px;width: 800px;"
+                             id="carbonDioxidechart-carbonDioxide"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="chart" style="display: block;" id="soilHumiditychart">
+                <div class="colorful-tab-wrapper" style="width:850px; height: 450px;margin-left:100px;"
+                     id="colorful-elliptic-soilHumidity">
+                    <ul class="colorful-tab-menu">
+                        <li class="colorful-tab-menu-item active" tab-color="#9ACD32">
+                            <a href="#soilHumiditychart-soilHumidity">土壤湿度</a>
+                        </li>
+                    </ul>
+                    <div class="colorful-tab-container" style="height: 500px;width: 600px;">
+                        <div class="colorful-tab-content active" style="position:absolute;height: 300px;width: 800px;"
+                             id="soilHumiditychart-soilHumidity"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="cb"></div>
+</div>
+<div class="top">
+    <i class="fa fa-arrow-up fa-3x" staria-hidden="true"></i>
+</div>
+<!--<script src="../../js/jquery.js" type="text/javascript"></script>-->
+<script src="../../js/jquery-3.2.1.js"></script>
+<!--<script src="http://code.jquery.com/jquery-1.9.1.js"></script>-->
+<script src="../../js/bootstrap.min.js" type="text/javascript"></script>
+<script src="../../js/colorfulTab.js" type="text/javascript"></script>
+<script src="../../js/jquery-ui.min.js"></script>
+<script src="../../js/back/research/datepicker.js" type="text/javascript"></script>
+<script src="../../js/echarts.min.js" type="text/javascript"></script>
+<script src="../../js/back/research/setcharts.js" type="text/javascript"></script>
+<script src="../../jsUtil/PublicBefore.js"></script>
+<script src="../../js/controllerCommon/nav.js"></script>
+<script src="../../js/controllerCommon/header.js"></script>
+<script src="../../js/dataShow/dataShow.js"></script>
+<script>
+    //    $(function () {
+    //        $.ajaxSetup({
+    //            //设置ajax请求结束后的执行动作
+    //            complete: function (XMLHttpRequest, textStatus) {
+    //                // 通过XMLHttpRequest取得响应头，sessionstatus
+    //                var sessionstatus = XMLHttpRequest.getResponseHeader("sessionstatus");
+    //                if (sessionstatus == "TIMEOUT") {
+    //                    var win = window;
+    //                    while (win != win.top) {
+    //                        win = win.top;
+    //                    }
+    //                    win.location.href = XMLHttpRequest.getResponseHeader("CONTEXTPATH");
+    //                }
+    //            }
+    //        });
+    //    });
+
+
+</script>
+</body>
+</html>
