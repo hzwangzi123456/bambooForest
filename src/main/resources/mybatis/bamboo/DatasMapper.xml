@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.bamboo.dao.DatasDao">
+<mapper namespace="com.bamboo.dao.DatasMapper">
     <!-- *********************************公共嵌入块********************************* -->
     <!-- 所有输出列 -->
     <sql id="publicOutCol">
@@ -82,7 +82,7 @@
 
     <!-- *********************************添加********************************* -->
     <!-- 新增 -->
-    <insert id="insertDatas" parameterType="DatasVO">
+    <insert id="insert" parameterType="DatasVO">
         INSERT INTO bamboo.datas (<include refid="publicInsertCol"/>)
         VALUES (<include refid="publicInCol"/>)
     </insert>
@@ -109,13 +109,13 @@
     <!--     </select> -->
 
     <!-- 获取记录数 -->
-    <select id="findDatasCountByVo" parameterType="DatasVO" resultType="java.lang.Integer">
+    <select id="findCountByVo" parameterType="DatasVO" resultType="java.lang.Integer">
         SELECT COUNT(*) FROM bamboo.datas
         <include refid="publicWhere"/>
     </select>
 
     <!-- 对象条件查询 -->
-    <select id="findDatasByPojo" parameterType="DatasVO" resultType="DatasVO">
+    <select id="findByPojo" parameterType="DatasVO" resultType="DatasVO">
         SELECT
         <include refid="publicOutCol"/>
         FROM bamboo.datas
@@ -136,7 +136,7 @@
     <!--     </select> -->
 
     <!-- 查询分页记录 -->
-    <select id="findDatasByPage" parameterType="java.util.Map" resultType="DatasVO">
+    <select id="findByPage" parameterType="java.util.Map" resultType="DatasVO">
         SELECT
         <include refid="publicOutCol"/>
         FROM bamboo.datas

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.bamboo.dao.UserDao">
+<mapper namespace="com.bamboo.dao.UserMapper">
     <!-- *********************************公共嵌入块********************************* -->
     <!-- 所有输出列 -->
     <sql id="publicOutCol">
@@ -76,7 +76,7 @@
     <!--     </select>  -->
 
     <!-- 对象条件查询 -->
-    <select id="findUserByPojo" parameterType="UserVO" resultType="UserVO">
+    <select id="findByPojo" parameterType="UserVO" resultType="UserVO">
         SELECT
         <include refid="publicOutCol"/>
         FROM bamboo.user
