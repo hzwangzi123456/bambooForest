@@ -1,7 +1,7 @@
 package com.bamboo.web;
 
 import com.alibaba.fastjson.JSON;
-import com.bamboo.bo.DatasBo;
+import com.bamboo.bo.GenericService;
 import com.bamboo.vo.Datas;
 import com.common.base.BaseController;
 import com.common.util.ExportExcelUtils;
@@ -34,7 +34,7 @@ public class DatasController extends BaseController {
      * 注入业务接口层
      **/
     @Autowired
-    private DatasBo datasBo;
+    private GenericService<Datas> genericService;
 
     /**
      * 定义参数
@@ -45,10 +45,6 @@ public class DatasController extends BaseController {
     public void setParaVal(Datas datas) {
         this.datas = datas;
         System.out.println(JSON.toJSONString(datas).toString());
-    }
-
-    public DatasBo getDatasBo() {
-        return datasBo;
     }
 
     public Map getPojoMap() {
@@ -65,8 +61,8 @@ public class DatasController extends BaseController {
         return map;
     }
 
-    @RequestMapping("/insertDatas.do")
-    public void insertDatas() {
+    @RequestMapping("/insert.do")
+    public void insert() {
         if (datas == null) {
             setFailure("未接受到数据");
             return;
@@ -96,7 +92,7 @@ public class DatasController extends BaseController {
             return;
         }
         try {
-            int res = datasBo.insertDatas(datas);
+            int res = genericService.insert(datas);
             if (res == 1) {
                 setSuccess("插入一条记录");
             } else {
@@ -108,10 +104,10 @@ public class DatasController extends BaseController {
         }
     }
 
-    @RequestMapping("/findDatasCountByVo.do")
-    public void findDatasCountByVo() {
+    @RequestMapping("/findCountByVo.do")
+    public void findCountByVo() {
         try {
-            Integer i = datasBo.findDatasCountByVo(datas);
+            Integer i = genericService.findCountByVo(datas);
             System.out.println(i);
             setAjaxMsg(i.toString());
         } catch (Exception e) {
@@ -120,10 +116,10 @@ public class DatasController extends BaseController {
         }
     }
 
-    @RequestMapping("/findDatasByPojo.do")
+    @RequestMapping("/findByPojo.do")
     public void findDatasByPojo() {
         try {
-            List<Datas> list = datasBo.findDatasByPojo(datas);
+            List<Datas> list = genericService.findByPojo(datas);
             setAjaxObject(list);
         } catch (Exception e) {
             e.printStackTrace();
@@ -131,16 +127,16 @@ public class DatasController extends BaseController {
         }
     }
 
-    @RequestMapping("/findDatasByPage.do")
-    public void findDatasByPage() {
+    @RequestMapping("/findByPage.do")
+    public void findByPage() {
         try {
-            Integer cnt = datasBo.findDatasCountByVo(datas);
+            Integer cnt = genericService.findCountByVo(datas);
             getPageUtil().setTotal(cnt);
             List<Datas> list = null;
             if (cnt > 0) {
                 Map schMap = getSchMap();
                 schMap.putAll(getPojoMap());
-                list = datasBo.findDatasByPage(schMap);
+                list = genericService.findByPage(schMap);
                 setAjaxGridData(list);
             }
         } catch (Exception e) {
@@ -156,7 +152,7 @@ public class DatasController extends BaseController {
             String excelName = "竹林数据表" + datas.getStartTimeTIMESTAMP().substring(0, 10) + "to" + datas.getEndTimeTIMESTAMP().substring(0, 10);
 
             //得到所要导出的数据
-            List<Datas> list = datasBo.findDatasByPojo(datas);
+            List<Datas> list = genericService.findByPojo(datas);
 
             // 获取需要转出的excle表头的map字段
             LinkedHashMap<String, String> fieldMap = new LinkedHashMap<String, String>();

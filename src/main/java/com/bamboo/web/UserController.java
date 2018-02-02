@@ -1,6 +1,6 @@
 package com.bamboo.web;
 
-import com.bamboo.bo.UserBo;
+import com.bamboo.bo.GenericService;
 import com.bamboo.vo.User;
 import com.common.base.BaseController;
 import com.common.util.CheckUtil;
@@ -29,7 +29,11 @@ public class UserController extends BaseController {
      * 注入业务接口层
      **/
     @Autowired
-    private UserBo userBo;
+    private GenericService<User> genericService;
+
+    public GenericService<User> getGenericService() {
+        return genericService;
+    }
 
     /**
      * 定义参数
@@ -41,15 +45,11 @@ public class UserController extends BaseController {
         this.user = user;
     }
 
-    public UserBo getUserBo() {
-        return userBo;
-    }
-
     @RequestMapping("/login.do")
     public void login() {
         User u = new User();
         u.setUsername(user.getUsername());
-        List<User> resultArr = userBo.findUserByPojo(u);
+        List<User> resultArr = genericService.findByPojo(u);
         if (resultArr == null || resultArr.size() == 0) {
             setFailure("账号不存在");
             return;
@@ -82,9 +82,9 @@ public class UserController extends BaseController {
         return;
     }
 
-    @RequestMapping("/findUserByPojo.do")
+    @RequestMapping("/findByPojo.do")
     public void findUserByPojo() {
-        List<User> list = userBo.findUserByPojo(user);
+        List<User> list = genericService.findByPojo(user);
         if (list == null || list.size() == 0) {
             setFailure("未发现users");
             return;
@@ -96,7 +96,7 @@ public class UserController extends BaseController {
     @RequestMapping(value = "/generateExcel.do")
     public void generateExcel() {
         //得到所要导出的数据
-        List<User> list = userBo.findUserByPojo(user);
+        List<User> list = genericService.findByPojo(user);
         //定义导出excel的名字
         String excelName = "用户表";
 

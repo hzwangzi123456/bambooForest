@@ -39,7 +39,6 @@ public class Datas {
         this.id = id;
     }
 
-
     public String getDateTime() {
         return dateTime;
     }
