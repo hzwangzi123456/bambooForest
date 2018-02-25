@@ -41,6 +41,10 @@ public class DatasController extends BaseController {
      **/
     private Datas datas;
 
+    public GenericService<Datas> getGenericService() {
+        return genericService;
+    }
+
     @ModelAttribute
     public void setParaVal(Datas datas) {
         this.datas = datas;

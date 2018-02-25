@@ -15,17 +15,47 @@ import java.util.Map;
  * @date 18/2/2 上午6:45.
  */
 @Service
-public abstract class GenericService<T> {
+public abstract class GenericService<T> implements GenericServiceBo<T> {
     @Autowired
     protected GenericMapper<T> mapper;
 
-    public abstract Integer insert(T vo) throws SysRuntimeException;
+    @Override
+    public Integer insert(T vo) throws SysRuntimeException {
+        return mapper.insert(vo);
+    }
 
-    public abstract Integer findCountByVo(T vo) throws SysRuntimeException;
+    @Override
+    public T findByKey(T vo) {
+        return mapper.findByKey(vo);
+    }
 
-    public abstract List<T> findByPojo(T vo) throws SysRuntimeException;
+    @Override
+    public Integer findCountByVo(T vo) throws SysRuntimeException {
+        return mapper.findCountByVo(vo);
+    }
 
-    public abstract List<T> findByPage(Map<String, Object> map) throws SysRuntimeException;
+    @Override
+    public List<T> findByPojo(T vo) throws SysRuntimeException {
+        return mapper.findByPojo(vo);
+    }
 
+    @Override
+    public List<T> findByPage(Map<String, Object> map) throws SysRuntimeException {
+        return mapper.findByPage(map);
+    }
 
+    @Override
+    public List<T> findByWhere(Map<String, Object> map) throws SysRuntimeException {
+        return mapper.findByWhere(map);
+    }
+
+    @Override
+    public List<T> findByQueryStr(String queryStr) throws SysRuntimeException {
+        return mapper.findByQueryStr(queryStr);
+    }
+
+    @Override
+    public Integer update(T vo) {
+        return mapper.update(vo);
+    }
 }

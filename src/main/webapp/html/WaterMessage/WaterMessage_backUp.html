@@ -12,6 +12,7 @@
             height: 550px;
         }
     </style>
+
 </head>
 
 <body>
@@ -52,39 +53,40 @@
 <script type="text/javascript" src="../../js/jquery-3.2.1.js"></script>
 <script type="text/javascript" src="../../js/WaterMessage/tooltip.js"></script>
 <script type="text/javascript">
+    //init();
     //边框描点结构体
     function point(x, y) {
         this.x = x;
         this.y = y;
     }
 
-    // 距离结构体
+    //距离结构体
     function distant(dis, col) {
         this.dis = dis;
         this.col = col;
     }
 
-    // 站点信息
+    //站点信息
     var Zhan = new Array();
-    // 站的坐标及对应的颜色等级（0~100）
     var ZhanCol = new Array();
     Zhan[0] = new point(381, 115);
-    ZhanCol[0] = 0;
+    ZhanCol[0] = 0;//0
     Zhan[1] = new point(581, 147);
-    ZhanCol[1] = 16;
+    ZhanCol[1] = 16;//16
     Zhan[2] = new point(732, 136);
-    ZhanCol[2] = 90;
+    ZhanCol[2] = 90;//90
     Zhan[3] = new point(704, 271);
-    ZhanCol[3] = 5;
+    ZhanCol[3] = 5;//5
     Zhan[4] = new point(613, 353);
-    ZhanCol[4] = 25;
+    ZhanCol[4] = 25;//25
     Zhan[5] = new point(495, 471);
-    ZhanCol[5] = 69;
+    ZhanCol[5] = 69;//69
     Zhan[6] = new point(367, 392);
-    ZhanCol[6] = 52;
+    ZhanCol[6] = 52;//5
     Zhan[7] = new point(257, 250);
-    ZhanCol[7] = 14;
-    // 边框的点,用于描绘湖的形状
+    ZhanCol[7] = 14;//14
+
+    //边框的点
     var i, j, ymin, ymax, m;
     var _Data = new Array();
     _Data[0] = new point(380, 114);
@@ -194,33 +196,37 @@
     _Data[104] = new point(376, 115);
     _Data[105] = new point(380, 114);
     _Data[106] = new point(401, 115);
-
-    // 找到最大和最小的y
     ymin = ymax = _Data[0].y
+
+    //求出_data数组中最大和最小值
     for (i = 1; i <= 104; i++) {
         if (_Data[i].y > ymax)
             ymax = _Data[i].y;
         if (_Data[i].y < ymin)
             ymin = _Data[i].y;
     }
-    // X轴扫描记录数组
-    var pp = new Array(); // 先声明一维
-    for (i = 0; i < 500; i++) { // 一维长度
-        pp[i] = new Array(); // 在声明二维
-        for (j = 0; j < 10; j++) { // 二维长度为5
+
+    //X轴扫描交点记录数组,一维代表y值,二维代表该第几个交点,数组值代表交点x坐标
+    var pp = new Array(); //先声明一维
+    for (i = 0; i < 500; i++) { //一维长度
+        pp[i] = new Array(); //在声明二维
+        for (j = 0; j < 10; j++) { //二维长度为5
             pp[i][j] = 0;
         }
     }
-    // X轴扫描交点数 （每行的交点数）
+
+    //X轴扫描交点数
     var kk = new Array();
     for (i = 0; i < 500; i++) {
         kk[i] = 0;
     }
 
-    // X轴扫描求交点 （每行交点的信息同时记录每行交点的个数）
+    //X轴扫描求交点
     for (i = ymin; i <= ymax; i++) {
         kk[i] = 0;
         for (j = 0; j < 105; j++) {
+            //x为交点的x坐标
+            var x = 0;
             if ((_Data[j].y < i && _Data[j + 1].y > i)
                     || (_Data[j].y > i && _Data[j + 1].y < i)) {
                 x = (i - _Data[j].y) * (_Data[j + 1].x - _Data[j].x)
@@ -237,10 +243,9 @@
                     pp[i][kk[i]++] = x;
             }
         }
-
     }
 
-    // 每行交点排序，使从小到大排序
+    //每行交点排序
     var t;
     for (m = ymin; m <= ymax; m++) {
         for (i = 0; i < kk[m] - 1; i++) {
@@ -253,76 +258,86 @@
 
         }
     }
-    //    var wColor = new Array();
-    //    wColor[0] = new point(0, 15);
-    //    wColor[1] = new point(0, 31);
-    //    wColor[2] = new point(0, 47);
-    //    wColor[3] = new point(0, 63);
-    //    wColor[4] = new point(0, 79);
-    //    wColor[5] = new point(0, 95);
-    //    wColor[6] = new point(0, 111);
-    //    wColor[7] = new point(0, 127);
-    //    wColor[8] = new point(0, 143);
-    //    wColor[9] = new point(0, 159);
-    //    wColor[10] = new point(0, 175);
-    //    wColor[11] = new point(0, 191);
-    //    wColor[12] = new point(0, 207);
-    //    wColor[13] = new point(0, 223);
-    //    wColor[14] = new point(0, 239);
-    //    wColor[15] = new point(0, 255);
-    //    wColor[16] = new point(16, 255);
-    //    wColor[17] = new point(32, 255);
-    //    wColor[18] = new point(48, 255);
-    //    wColor[19] = new point(64, 255);
-    //    wColor[20] = new point(80, 255);
-    //    wColor[21] = new point(96, 255);
-    //    wColor[22] = new point(112, 255);
-    //    wColor[23] = new point(128, 255);
-    //    wColor[24] = new point(144, 255);
-    //    wColor[25] = new point(160, 255);
-    //    wColor[26] = new point(176, 255);
-    //    wColor[27] = new point(192, 255);
-    //    wColor[28] = new point(208, 255);
-    //    wColor[29] = new point(224, 255);
-    //    wColor[30] = new point(240, 255);
+    var wColor = new Array();
+    wColor[0] = new point(0, 15);
+    wColor[1] = new point(0, 31);
+    wColor[2] = new point(0, 47);
+    wColor[3] = new point(0, 63);
+    wColor[4] = new point(0, 79);
+    wColor[5] = new point(0, 95);
+    wColor[6] = new point(0, 111);
+    wColor[7] = new point(0, 127);
+    wColor[8] = new point(0, 143);
+    wColor[9] = new point(0, 159);
+    wColor[10] = new point(0, 175);
+    wColor[11] = new point(0, 191);
+    wColor[12] = new point(0, 207);
+    wColor[13] = new point(0, 223);
+    wColor[14] = new point(0, 239);
+    wColor[15] = new point(0, 255);
+    wColor[16] = new point(16, 255);
+    wColor[17] = new point(32, 255);
+    wColor[18] = new point(48, 255);
+    wColor[19] = new point(64, 255);
+    wColor[20] = new point(80, 255);
+    wColor[21] = new point(96, 255);
+    wColor[22] = new point(112, 255);
+    wColor[23] = new point(128, 255);
+    wColor[24] = new point(144, 255);
+    wColor[25] = new point(160, 255);
+    wColor[26] = new point(176, 255);
+    wColor[27] = new point(192, 255);
+    wColor[28] = new point(208, 255);
+    wColor[29] = new point(224, 255);
+    wColor[30] = new point(240, 255);
+
+    //var p1= new point ; var p2= new point ;
+    //var PA= new point ; var PB= new point ; var P3= new point ;
 
     paint();
+    //	var wwdis=new distant;
 
     function paint() {
         var c = document.getElementById("myCanvas");
         var context = c.getContext("2d");
-        // context.beginPath();
-        // context.strokeStyle ="blue";
+        //context.beginPath();
+        //context.strokeStyle ="blue";
 
         /*
-         * context.moveTo(_Data[0].x,_Data[0].y); for(i=1;i<=105;i++)
-         * context.lineTo(_Data[i].x,_Data[i].y);
-         * context.closePath();context.stroke(); context.fillStyle =
-         * "rgb(100,149,237)"; context.fill();
-         */
+         context.moveTo(_Data[0].x,_Data[0].y);
+         for(i=1;i<=105;i++)  context.lineTo(_Data[i].x,_Data[i].y);
+         context.closePath();context.stroke();
+         context.fillStyle = "rgb(100,149,237)";
+         context.fill();
+        */
+        //m1,m2代表观察点
         var m1, m2, num, wi, wj, wm;
+        //交点
         var lp = new point;
         var dis, col;
         var _Juli = new Array();
-        var tt;// = new distant;
+        var tt;//= new distant;
 
-        //从最下面一行开始往上遍历
         for (wi = ymin; wi <= ymax; wi++) {
             for (wj = 0; wj < kk[wi]; wj = wj + 2) {
                 for (wm = pp[wi][wj]; wm <= pp[wi][wj + 1]; wm = wm + 2) {
-
                     num = 0;
                     for (m1 = 0; m1 < 8 - 1; m1++) {
                         for (m2 = m1 + 1; m2 < 8; m2++) {
+                            //var lp = new point(wm,wi);
                             lp.x = wm;
                             lp.y = wi;
+
+                            //dis=GetNearestDistance(Zhan[m1],Zhan[m2],lp);
+                            // col=(ZhanCol[m1]+ZhanCol[m2])/2;
+                            // _Juli[num++]=new distant(dis,col);
                             _Juli[num] = new distant;
-                            _Juli[num++] = GetNearestDistance(Zhan[m1], Zhan[m2],
-                                    lp, m1, m2);
+                            _Juli[num++] = GetNearestDistance(Zhan[m1],
+                                    Zhan[m2], lp, m1, m2);
+                            //  _Juli[num++]=new distant(wwdis.dis,wwdis.col);
                         }
                     }
                     var wk = 12;
-                    // 找到距离最近的 wk 条线信息
                     for (m1 = 0; m1 < wk; m1++) {
                         for (m2 = m1 + 1; m2 < num; m2++) {
                             if (_Juli[m1].dis > _Juli[m2].dis) {
@@ -337,7 +352,6 @@
                         }
                     }
                     col = 0;
-                    //求12个距离的平均值
                     for (m1 = 0; m1 < wk; m1++)
                         col = col + _Juli[m1].col;
                     col = col / wk;
@@ -354,37 +368,28 @@
                     }
 
                     /*
-                     * if(col>30) col=30; if(col<1) col=0;
-                     * context.fillStyle="rgb(0,"+wColor[col].x+","+wColor[col].y+")";
+                    if(col>30) col=30;
+                     if(col<1) col=0;
+                     context.fillStyle="rgb(0,"+wColor[col].x+","+wColor[col].y+")";
                      */
                     context.fillRect(wm, wi, 2, 2);
                 }
-
             }
         }
     }
 
-    // 求两点的距离
+    //function
     function GetPointDistance(p1, p2) {
         return Math.sqrt((p1.x - p2.x) * (p1.x - p2.x) + (p1.y - p2.y)
                 * (p1.y - p2.y));
     }
 
-    /**
-     * 求PA、PB、P3构成的三角形的高和颜色
-     * @param PA 第一个站点的坐标信息
-     * @param PB 第二个站点的坐标信息
-     * @param P3 湖上某个站点的坐标信息
-     * @param wm1 第一个站点的下标
-     * @param wm2 第二个站点的下标
-     * @returns {distant} 湖上该点到PA和PB两点连线的距离和该点的颜色
-     */
     function GetNearestDistance(PA, PB, P3, wm1, wm2) {
         var wwdis = new distant;
         var wwcol;
+        //----------图2--------------------
         var a, b, c;
         a = GetPointDistance(PB, P3);
-        //当点离PB站点很近
         if (a <= 0.00001) {
             wwcol = ZhanCol[wm2];
             wwdis.dis = 0.0;
@@ -393,7 +398,6 @@
         }
 
         b = GetPointDistance(PA, P3);
-        //当点离PA站点很近
         if (b <= 0.00001) {
             wwcol = ZhanCol[wm1];
             wwdis.dis = 0.0;
@@ -401,43 +405,38 @@
             return wwdis;
         }
         c = GetPointDistance(PA, PB);
-        //如果PA和PB坐标相同，则退出函数，并返回距离
         if (c <= 0.00001) {
             wwcol = ZhanCol[wm2];
             wwdis.dis = a;
             wwdis.col = wwcol;
             return wwdis;
         }
-        //如果是钝角但距离PA近返回b   因为在站点连线的延长线上不知道情况，选择到最近站点的信息
-        if (a * a >= b * b + c * c) {
+        //如果PA和PB坐标相同，则退出函数，并返回距离
+        //------------------------------
+
+        if (a * a >= b * b + c * c) {//--------图3--------
             wwcol = ZhanCol[wm1];
             wwdis.dis = b;
             wwdis.col = wwcol;
             return wwdis;
-        }
-        //如果是钝角但距离PB近返回a  因为在站点连线的延长线上不知道情况，选择到最近站点的信息
-        if (b * b >= a * a + c * c) {
+        }//如果是钝角返回b
+        if (b * b >= a * a + c * c) {//--------图4-------
             wwcol = ZhanCol[wm1];
             wwdis.dis = a;
             wwdis.col = wwcol;
             return wwdis;
-        }
+        } //如果是钝角返回a
 
-
-        //使用海伦公式求面积
-        var l = (a + b + c) / 2;
-        var s = Math.sqrt(l * (l - a) * (l - b) * (l - c));
-
-        //求三角形的高,也就是点到两站点连线的距离
+        //图1
+        var l = (a + b + c) / 2; //周长的一半
+        var s = Math.sqrt(l * (l - a) * (l - b) * (l - c)); //海伦公式求面积，也可以用矢量求
         var d = 2 * s / c;
         var dd = Math.sqrt(b * b - d * d);
-
-        //根据比例求颜色变化
+        //wwcol=ZhanCol[wm1]*dd/c+ZhanCol[wm2]*(1-dd/c);
         wwcol = ZhanCol[wm1] + (ZhanCol[wm2] - ZhanCol[wm1]) * (dd / c);
         wwdis.dis = d;
         wwdis.col = wwcol;
         return wwdis;
     }
-
 </script>
 </html>
